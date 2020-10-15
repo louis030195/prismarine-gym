@@ -1,0 +1,17 @@
+version: '3.7'
+
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "FALSE"
+      ONLINE_MODE: "FALSE"
+      VERSION: 1.16.1
+    volumes:
+    - "data:/data"
+
+volumes:
+  data:
