@@ -10,6 +10,12 @@ __Warning__: Under active development. APIs may change.
 
 Train minecraft agents using reinforcement learning
 
+## Dependencies
+
+- <https://github.com/louis030195/gym.js> (until merged).
+- Various tools from <https://github.com/PrismarineJS> for Minecraft stuff.
+- <https://www.tensorflow.org/js> for deep learning (unfortunately tighted to a specific framework unlike in Python which has Numpy, but TFJS is great).
+
 ## Usage
 
 ```js
@@ -25,3 +31,4 @@ for (const x of Array(1000).keys()) {
 }
 env.close();
 ```
+
