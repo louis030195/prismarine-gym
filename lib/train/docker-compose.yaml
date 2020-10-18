@@ -1,17 +1,7 @@
-version: '3.7'
-
+version: '3.8'
 
 services:
   minecraft:
-    image: itzg/minecraft-server
+    image: prismarinejs/flying-squid
     ports:
       - "25565:25565"
-    environment:
-      EULA: "FALSE"
-      ONLINE_MODE: "FALSE"
-      VERSION: 1.16.1
-    volumes:
-    - "data:/data"
-
-volumes:
-  data:

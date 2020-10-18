@@ -6,7 +6,7 @@
 [![Irc](https://img.shields.io/badge/chat-on%20irc-brightgreen.svg)](https://irc.gitter.im/)
 [![Try it on gitpod](https://img.shields.io/badge/try-on%20gitpod-brightgreen.svg)](https://gitpod.io/#https://github.com/PrismarineJS/prismarine-template)
 
-__Warning__: Under active development. APIs may change.
+__Warning__: Under active development. APIs may change. Lot of trailing development code around.
 
 Train minecraft agents using reinforcement learning
 
@@ -17,6 +17,11 @@ Train minecraft agents using reinforcement learning
 - <https://www.tensorflow.org/js> for deep learning (unfortunately tighted to a specific framework unlike in Python which has Numpy, but TFJS is great).
 
 ## Usage
+
+
+```bash
+docker-compose -f lib/train/docker-compose.yaml up
+```
 
 ```js
 import { PrismarineEnv } from "prismarine-gym";
@@ -32,3 +37,6 @@ for (const x of Array(1000).keys()) {
 env.close();
 ```
 
+# TODO
+
+- Could be nice to make it possible to run prismarine-gym in a background process while playing to minecraft, learning the policy (and building a dataset) of the human player. Then you tell many Minecraft players "launch this thing" with a noob-friendly tuto = gather data !

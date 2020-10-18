@@ -1,4 +1,4 @@
-import PrismarineEnv from '../env/Prismarine';
+import PrismarineEnv from '../env/prismarine';
 import { createBot } from 'mineflayer';
 import { createMCServer } from 'flying-squid';
 import { randomString } from '../utils/utils';
@@ -40,13 +40,14 @@ describe('PrismarineEnv', () => {
     //   'version': version
     // })
     let env = new PrismarineEnv({
-      host: '172.18.0.1',
+      host: '127.0.0.1',
       username: randomString(15),
       port: port,
       version: version
-    }, [], []);
-    env.reset();
-  });
+    }, [], [])
+    env.reset()
+    env.bot.chat('hello')
+  })
   // it('env', () => {
   //   expect(env).toBeDefined();
   //   console.log(JSON.stringify(env))
