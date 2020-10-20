@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   minecraft:
+    container_name: flying-squid
     image: prismarinejs/flying-squid
     ports:
       - "25565:25565"

@@ -2,16 +2,16 @@
   "name": "prismarine-gym",
   "version": "0.1.0",
   "description": "A JavaScript Environment for Reinforcement Learning in Minecraft",
-  "main": "dist/env.js",
-  "types": "dist/env.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest --coverage --coverageReporters=text-lcov",
-    "format": "prettier --write \"src/**/*.ts\" \"lib/**/*.js\"",
+    "clean": "rm -rf dist",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "demo": "webpack --watch & live-server --port=8085",
-    "docs": "typedoc ./lib"
+    "docs": "typedoc ./src"
   },
   "keywords": [
     "reinforcement learning"
@@ -37,7 +37,8 @@
     "typescript": "^3.9.7",
     "webpack": "^4.35.0",
     "webpack-cli": "^3.3.4",
-    "flying-squid": "1.3.1"
+    "flying-squid": "1.3.1",
+    "vec3": "0.1.7"
   },
   "files": [
     "dist/**/*"
@@ -45,6 +46,7 @@
   "dependencies": {
     "gym-js": "file:../gym.js",
     "@tensorflow/tfjs": "2.6.0",
-    "mineflayer": "2.28.1"
+    "mineflayer": "2.28.1",
+    "mineflayer-pathfinder": "1.0.10"
   }
 }

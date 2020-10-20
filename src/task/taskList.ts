@@ -1,5 +1,5 @@
 import Follow from "./follow";
 
-export const tasks = {
+export const taskList = {
     'Follow-v0': Follow
 };
