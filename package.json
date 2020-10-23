@@ -44,9 +44,11 @@
     "dist/**/*"
   ],
   "dependencies": {
-    "gym-js": "file:../gym.js",
     "@tensorflow/tfjs": "2.6.0",
+    "gym-js": "file:../gym.js",
+    "minecraft-data": "^2.69.1",
     "mineflayer": "2.28.1",
-    "mineflayer-pathfinder": "1.0.10"
+    "mineflayer-pathfinder": "1.0.10",
+    "prismarine-viewer": "^1.6.0"
   }
 }

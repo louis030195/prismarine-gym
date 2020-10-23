@@ -2,6 +2,9 @@ import * as tf from '@tensorflow/tfjs';
 import { Space } from 'gym-js';
 import Env from 'gym-js/dist/core';
 import { Bot, BotOptions, createBot } from 'mineflayer';
+// tslint:disable-next-line: no-var-requires
+const mineflayerViewer = require('prismarine-viewer').mineflayer
+
 import { Task } from '../task/task';
 import { taskList } from '../task/taskList';
 
@@ -31,13 +34,7 @@ export class PrismarineEnv implements Env {
     this.done = false;
     this.options = options;
 
-    this.bot = createBot({
-      host: this.options.host,
-      port: this.options.port,
-      username: this.options.username, // TODO: sort of agent ID
-      // password: this.options.password, // I suppose it could be interesting for inference on real server later
-      version: '1.16.1'
-    });
+    this.bot = createBot(options);
     this.task = new taskList[task](this.bot, taskConfig);
     this.actionSpace = this.task.actionSpace;
     this.rewardRange = this.task.rewardRange;
@@ -53,7 +50,8 @@ export class PrismarineEnv implements Env {
   }
 
   public render(mode: string='html'): void {
-    // TODO: https://github.com/PrismarineJS/prismarine-viewer
+    // see: https://github.com/PrismarineJS/prismarine-viewer
+    mineflayerViewer(this.bot, { port: 3000 }) // Start the viewing server on port 3000
   }
 
   public close(): void {

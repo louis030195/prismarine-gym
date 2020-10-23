@@ -19,7 +19,7 @@ Train minecraft agents using reinforcement learning
 ## Usage
 
 ```bash
-bin/train.sh
+examples/train.sh
 ```
 
 # TODO

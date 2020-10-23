@@ -2,8 +2,8 @@ import * as tf from '@tensorflow/tfjs';
 import { Space } from 'gym-js';
 import { Bot } from 'mineflayer';
 
-
-export abstract class Task { // TODO: naming convention file upper or lower camel ?
+// TODO: see https://minerl.io/dataset/
+export abstract class Task {
     public actionSpace: Space;
     public observationSpace: Space;
     public rewardRange: Space;
