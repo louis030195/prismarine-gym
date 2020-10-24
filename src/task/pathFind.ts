@@ -2,7 +2,6 @@ import * as tf from '@tensorflow/tfjs';
 import { Discrete, Space } from 'gym-js';
 import Box from "gym-js/dist/spaces/box";
 import { Bot } from "mineflayer";
-import { goals, Movements, Pathfinder } from 'mineflayer-pathfinder';
 import { Vec3 } from 'vec3';
 import { Task } from "./task";
 
@@ -11,12 +10,13 @@ import { Task } from "./task";
  */
 export default class PathFind extends  Task {
     private target: Vec3;
-
     constructor(bot: Bot, taskConfig: any) {
         super(bot, taskConfig);
-        this.actionSpace = new Discrete([2]);
-        this.observationSpace = new Discrete([2]);
+        // Can pick a destination in a small box around
+        this.actionSpace = new Box([-5, -5, -5], [5, 5, 5]);
+        this.observationSpace = new Discrete([3]);
         this.rewardRange = new Discrete([1]);
+
         if (!("target" in taskConfig)) {
             throw new Error('No target given to PathFind-v0 task');
         }

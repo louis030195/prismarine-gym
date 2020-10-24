@@ -1,10 +1,10 @@
 # Builds
-/lib
-/temp
+# /lib
+# /temp
 /dist
-/docs
-/input
-/website
+# /docs
+# /input
+# /website
 
 ### Node ###
 # Logs

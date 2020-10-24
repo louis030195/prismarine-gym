@@ -10,8 +10,11 @@ __Warning__: Under active development. APIs may change. Lot of trailing developm
 
 Train minecraft agents using reinforcement learning
 
+![alt](docs/treeChop.gif)
+
 ## Dependencies
 
+- <https://www.docker.com> (preferred way for training, you could also workaround with bare-metal artefacts)
 - <https://github.com/louis030195/gym.js> (until merged).
 - Various tools from <https://github.com/PrismarineJS> for Minecraft stuff.
 - <https://www.tensorflow.org/js> for deep learning (unfortunately tighted to a specific framework unlike in Python which has Numpy, but TFJS is great)
@@ -19,9 +22,14 @@ Train minecraft agents using reinforcement learning
 ## Usage
 
 ```bash
-examples/train.sh
+examples/train.sh treeChop
+# You can listen to logs using
+docker logs mc-server -f
 ```
 
 # TODO
 
+- [ ] Disable anti chat spam somehow
+- [ ] More tasks (with level of difficulty impacting the degree of sparse / dense rewards and the observations fine-tuning)
+- [ ] SCALE IT UP: `helm train ./train --set workers=200 --set agents=200` :)
 - Could be nice to make it possible to run prismarine-gym in a background process while playing to minecraft, learning the policy (and building a dataset) of the human player. Then you tell many Minecraft players "launch this thing" with a noob-friendly tuto = gather data !

@@ -3,7 +3,7 @@ import { Space } from 'gym-js';
 import { Bot } from 'mineflayer';
 
 // TODO: see https://minerl.io/dataset/
-export abstract class Task {
+export abstract class Task { // TODO: could have a param "difficulty" i.e. sparse vs dense rewards, less or more fine-tuned observations ... 
     public actionSpace: Space;
     public observationSpace: Space;
     public rewardRange: Space;

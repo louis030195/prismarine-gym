@@ -61,4 +61,14 @@ export class PrismarineEnv implements Env {
   public seed(seed: number): void {
     //
   }
+
+  /**
+   * Log message to chat or to console if wanted
+   * @param message message to log
+   * @param printToConsole whether to print to console, default false
+   */
+  public log(message: string, printToConsole: boolean = false): void {
+    // tslint:disable-next-line: no-console
+    printToConsole ? console.log(message) : this.bot.chat(message);
+  }
 }
