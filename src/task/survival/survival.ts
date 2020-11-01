@@ -4,7 +4,7 @@ import Box from "gym-js/dist/spaces/box";
 import { Bot } from "mineflayer";
 import { goals, Movements, Pathfinder } from 'mineflayer-pathfinder';
 import { Vec3 } from 'vec3';
-import { Task } from "./task";
+import { Task } from "../task";
 
 /**
  * In addition to data on specific, designed tasks, we provide data in "Survival." 
@@ -13,11 +13,9 @@ import { Task } from "./task";
  * players formulate their own high-level goals and obtain items to complete these goals.
  */
 export default class Survival extends  Task {
-    constructor(bot: Bot, taskConfig: any) {
-        super(bot, taskConfig);
-        this.actionSpace = new Discrete([2]);
-        this.observationSpace = new Discrete([2]);
-        this.rewardRange = new Discrete([1]);
+    constructor(bot: Bot, server: any, taskConfig: any) {
+        super(bot, server, taskConfig);
+        throw new Error("Not implemented");
     }
 
     public reset(): tf.Tensor {

@@ -21,14 +21,72 @@ Train minecraft agents using reinforcement learning
 
 ## Usage
 
-```bash
-examples/train.sh treeChop
-# You can listen to logs using
-docker logs mc-server -f
+```js
+const PrismarineEnv = require('prismarine-gym').PrismarineEnv;
+const { pathfinder } = require('mineflayer-pathfinder')
+const port = 25565
+const version = '1.16.1'
+let env = new PrismarineEnv({
+  host: 'localhost',
+  port: port,
+  username: 'singularity',
+  version: version
+},
+  {
+    'motd': 'A Minecraft Server training reinforcement learning agent',
+    'port': port,
+    'max-players': 10,
+    'online-mode': false,
+    'logging': true,
+    'gameMode': 1,
+    'generation': {
+      'name': 'diamond_square',
+      'options': {
+        'worldHeight': 80
+      }
+    },
+    'kickTimeout': 10000,
+    'plugins': {},
+    'modpe': false,
+    'view-distance': 10,
+    'version': version,
+    'player-list-text': {
+      header: { text: 'Flying squid' },
+      footer: { text: 'RL server' }
+    }
+  })
+const start = async () => {
+  await env.connect('TreeChop-v0')
+  env.bot.loadPlugin(pathfinder)
+  // env.render(); // Uncomment to have web-visualisation using mineflayer-viewer
+  const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs))
+  env.bot.on('chat', async (username, message) => {
+    if (username === env.bot.username) return
+    if (message === 'task') {
+      let observation = env.reset()
+      for (const x of Array(10000).keys()) {
+        let action = env.actionSpace.sample()
+        let actionAsArray = await action.array();
+        actionAsArray[0] += env.bot.entity.position.x
+        actionAsArray[1] += env.bot.entity.position.y
+        actionAsArray[2] += env.bot.entity.position.z
+        let [observation, reward, done, info] = env.step(actionAsArray)
+        env.log(`{ "Action": ${action},\n"Observation": ${observation},\n"Reward": ${reward},\n"Done": ${done},\n"Info": ${info}}\n`, true)
+        if (done) observation = env.reset()
+        await sleep(1000)
+      }
+      env.close();
+    }
+  })
+}
+
+start()
+
 ```
 
 # TODO
 
+- [ ] Implement a basic RL algo (preferably shallow learning since we can't have much data)
 - [ ] Disable anti chat spam somehow
 - [ ] More tasks (with level of difficulty impacting the degree of sparse / dense rewards and the observations fine-tuning)
 - [ ] SCALE IT UP: `helm train ./train --set workers=200 --set agents=200` :)

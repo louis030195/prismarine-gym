@@ -1,6 +1,6 @@
-import Follow from "./follow";
-import PathFind from "./pathFind";
-import TreeChop from "./treeChop";
+import Follow from "./follow/follow";
+import PathFind from "./pathFind/pathFind";
+import TreeChop from "./treeChop/treeChop";
 
 export const taskList = {
     'Follow-v0': Follow,

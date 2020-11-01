@@ -1,26 +1,37 @@
 import * as tf from '@tensorflow/tfjs';
 import { Space } from 'gym-js';
 import { Bot } from 'mineflayer';
+import { ObtainItemConfig } from './obtainItem/obtainItemConfig';
+import { TaskConfig } from './taskConfig';
+import { TreeChopConfig } from './treeChop/treeChopConfig';
 
 // TODO: see https://minerl.io/dataset/
 export abstract class Task { // TODO: could have a param "difficulty" i.e. sparse vs dense rewards, less or more fine-tuned observations ... 
     public actionSpace: Space;
     public observationSpace: Space;
     public rewardRange: Space;
+    /**
+     * Task may use the bot to execute actions, collect observations and rewards.
+     */
     protected bot: Bot;
     /**
-     * Contains information about the task (which object to follow ...) (TODO: and algorithm hyperparameters ?)
+     * Tasks may use the server to execute logic at specific states of the training (resettting map, task, positions ...).
      */
-    // TODO: prob config class ?
-    protected taskConfig: any; // see https://github.com/Unity-Technologies/ml-agents/blob/release_8_docs/docs/Training-ML-Agents.md#environment-parameter-randomization
+    protected server: any;
+    /**
+     * Contains information about the task (which object to follow ...). (TODO: and algorithm hyperparameters ?)
+     */
+    protected taskConfig?: TaskConfig; 
+    // see https://github.com/Unity-Technologies/ml-agents/blob/release_8_docs/docs/Training-ML-Agents.md#environment-parameter-randomization
     // randomization is essential to generalize, TODO: appropriate type, i.e. ts class ... not urgent
     protected parameterRandomization: any; 
     // bottom-up learning, you don't learn to run until you know how to walk
     // TODO: appropriate type, i.e. ts class ... not urgent
     protected curriculum?: any; // see https://github.com/Unity-Technologies/ml-agents/blob/release_8_docs/docs/Training-ML-Agents.md#curriculum
     
-    constructor(bot: Bot, taskConfig: any) { 
+    constructor(bot: Bot, server: any, taskConfig: TaskConfig = null) { // TODO: fix TS flying-squid
         this.bot = bot;
+        this.server = server;
         this.taskConfig = taskConfig;
     }
     
@@ -32,6 +43,4 @@ export abstract class Task { // TODO: could have a param "difficulty" i.e. spars
     // why do we want to wrap step in task ? because each task will have different goal, therefore different
     // rewards, different condition to make the episode "done"
     public abstract step(action: number): [tf.Tensor, number, boolean, {}];
-
 }
-
