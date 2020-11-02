@@ -1,9 +1,7 @@
 import * as tf from '@tensorflow/tfjs';
 import { Space } from 'gym-js';
 import { Bot } from 'mineflayer';
-import { ObtainItemConfig } from './obtainItem/obtainItemConfig';
 import { TaskConfig } from './taskConfig';
-import { TreeChopConfig } from './treeChop/treeChopConfig';
 
 // TODO: see https://minerl.io/dataset/
 export abstract class Task { // TODO: could have a param "difficulty" i.e. sparse vs dense rewards, less or more fine-tuned observations ... 

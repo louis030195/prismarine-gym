@@ -56,7 +56,7 @@ let env = new PrismarineEnv({
     }
   })
 const start = async () => {
-  await env.connect('TreeChop-v0')
+  await env.connect('ObtainItem-v0')
   env.bot.loadPlugin(pathfinder)
   // env.render(); // Uncomment to have web-visualisation using mineflayer-viewer
   const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs))
