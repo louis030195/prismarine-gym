@@ -14,12 +14,17 @@ Train minecraft agents using reinforcement learning
 
 ## Dependencies
 
-- <https://www.docker.com> (preferred way for training, you could also workaround with bare-metal artefacts)
 - <https://github.com/louis030195/gym.js> (until merged).
 - Various tools from <https://github.com/PrismarineJS> for Minecraft stuff.
 - <https://www.tensorflow.org/js> for deep learning (unfortunately tighted to a specific framework unlike in Python which has Numpy, but TFJS is great)
 
-## Usage
+## Examples
+
+```bash
+node examples/obtainItem.js
+```
+
+## Usages
 
 ```js
 const PrismarineEnv = require('prismarine-gym').PrismarineEnv;
@@ -67,9 +72,6 @@ const start = async () => {
       for (const x of Array(10000).keys()) {
         let action = env.actionSpace.sample()
         let actionAsArray = await action.array();
-        actionAsArray[0] += env.bot.entity.position.x
-        actionAsArray[1] += env.bot.entity.position.y
-        actionAsArray[2] += env.bot.entity.position.z
         let [observation, reward, done, info] = env.step(actionAsArray)
         env.log(`{ "Action": ${action},\n"Observation": ${observation},\n"Reward": ${reward},\n"Done": ${done},\n"Info": ${info}}\n`, true)
         if (done) observation = env.reset()
